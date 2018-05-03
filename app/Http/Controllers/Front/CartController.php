@@ -30,14 +30,16 @@ class CartController extends Controller
 
         $products = Product::find($product_ids);
         $grand_total = 0;
-        foreach($carts as $key => $cart){
-            foreach($products as &$product){             
-                if($cart['product_id'] == $product->id){
-                    $product->cart_qty = $carts[$key]['quantity'];
-                    $product->total = $product->cart_qty * $product->price;
-                    $grand_total += $product->total;
-                }
-            }           
+        if(!empty($carts)){
+            foreach($carts as $key => $cart){
+                foreach($products as &$product){             
+                    if($cart['product_id'] == $product->id){
+                        $product->cart_qty = $carts[$key]['quantity'];
+                        $product->total = $product->cart_qty * $product->price;
+                        $grand_total += $product->total;
+                    }
+                }           
+            }
         }
         return view('front.cart.index', ['products' => $products, 'grand_total' => $grand_total]);
     }
@@ -69,10 +71,16 @@ class CartController extends Controller
             $request->session()->push('carts', $post_cart);
         }        
         
+        return redirect('cart');
     }
 
     public function removeItem()
     {
 
+    }
+
+    public function test()
+    {
+        
     }
 }

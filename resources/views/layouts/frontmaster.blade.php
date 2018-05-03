@@ -4,14 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>itOffside - @yield('title')</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ URL::asset('font-awesome/css/fontawesome-all.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ URL::asset('css/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ URL::asset('css/front-custom.css') }}" rel="stylesheet" type="text/css"/>
     
     @yield('style')
+
+    <script type="text/javascript">
+        var APP_URL = {!! json_encode(url('/')) !!}
+    </script>
 </head>
 
 <body>
@@ -74,6 +80,9 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>        
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/holder.min.js') }}"></script>
+
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+
     <script src="{{ asset('js/front-custom.min.js') }}"></script>
 
     @yield('script')

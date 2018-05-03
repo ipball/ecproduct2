@@ -21,7 +21,7 @@
                         @forelse($products as $product)
                         <tr>
                             <td class="product-remove text-center align-middle">
-                                <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                                <button type="button" data-id="{{ $product->id }}" class="btn btn-danger btn-sm remove-item"><i class="fas fa-times"></i></button>
                             </td>
                             <td class="product-image text-center">
                                 <img src="{{ $product->full_image }}" class="img-fluid rounded" style="height: 100px;" alt="itOffisde.com">

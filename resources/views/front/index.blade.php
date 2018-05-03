@@ -31,7 +31,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a role="button" href="{{ url('product/'.$product->id.'/'.$product->name) }}" class="btn btn-sm btn-outline-secondary">รายละเอียด</a>
-                                <button type="button" data-url="{{ $product->id }}" class="btn btn-sm btn-primary">
+                                <button type="button" data-url="{{ $product->id }}" class="btn btn-sm btn-primary add-item">
                                     <i class="fa fa-shopping-cart"></i>
                                     สั่งซื้อ
                                 </button>
@@ -48,4 +48,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/front-home.min.js') }}"></script>
 @endsection
