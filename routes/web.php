@@ -10,6 +10,6 @@ Route::get('product/{id}/{name}', 'Front\ProductController@view');
 Route::prefix('cart')->group(function(){
     Route::get('', 'Front\CartController@index');
     Route::post('add', 'Front\CartController@addItem');
-    Route::delete('delete', 'Front\CartController@deleteItem');
+    Route::get('delete', 'Front\CartController@deleteItem');
     Route::patch('update', 'Front\CartController@updateItem');
 });

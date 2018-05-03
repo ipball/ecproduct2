@@ -7,7 +7,6 @@ use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
-use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -20,67 +19,57 @@ class CartController extends Controller
 
     public function index(Request $request)
     {
-        $carts = $request->session()->get('carts');          
+        $carts = $request->session()->exists('carts') ? $request->session()->get('carts') : [];
+        $quantities = $request->session()->get('quantities');
+
         $product_ids = collect([]);
-        if(!empty($carts)){
-            foreach ($carts as $cart) {
-                $product_ids->push((int) $cart['product_id']);
-            }
-        }
+        foreach ($carts as $product_id) {
+            $product_ids->push((int) $product_id);
+        }        
 
         $products = Product::find($product_ids);
-        $grand_total = 0;
-        if(!empty($carts)){
-            foreach($carts as $key => $cart){
-                foreach($products as &$product){             
-                    if($cart['product_id'] == $product->id){
-                        $product->cart_qty = $carts[$key]['quantity'];
-                        $product->total = $product->cart_qty * $product->price;
-                        $grand_total += $product->total;
-                    }
-                }           
-            }
-        }
+        $grand_total = 0;        
+        foreach ($products as &$product) {
+            $key = array_search($product->id, $carts);                        
+            $product->cart_qty = $quantities[$key];
+            $product->total = $product->cart_qty * $product->price;
+            $product->key = $key;
+            $grand_total += $product->total;            
+        }                    
         return view('front.cart.index', ['products' => $products, 'grand_total' => $grand_total]);
     }
 
     public function addItem(Request $request)
-    {
-        $post_cart = array(
-            'product_id' => $request->input('product_id'),
-            'quantity' => $request->input('quantity'),
-            'cart_date' => strtotime(Carbon::now())
-        );
-        
-        $carts = $request->session()->get('carts');
-        if ($request->session()->exists('carts')) {
-            $index = -1;
-            foreach ($carts as $key => $cart) {
-                if ($cart['product_id'] == $request->input('product_id')) {
-                    $index = $key;
-                }
-            }
+    {        
+        $carts = $request->session()->exists('carts') ? $request->session()->get('carts') : [];
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
 
-            if ($index < 0) {
-                $request->session()->push('carts', $post_cart);
-            } else {
-                $carts[$index]['quantity'] += $request->input('quantity');
-                $request->session()->put('carts', $carts);
-            }
+        if (in_array($product_id, $carts)) {
+            $key = array_search($product_id, $carts);
+            $quantities = $request->session()->get('quantities');
+            $quantities[$key] += $quantity;
+            $request->session()->put('quantities', $quantities);
         } else {
-            $request->session()->push('carts', $post_cart);
-        }        
-        
+            $request->session()->push('carts', $product_id);
+            $request->session()->push('quantities', $quantity);
+        }       
+
         return redirect('cart');
     }
 
-    public function removeItem()
+    public function deleteItem(Request $request)
     {
+        $carts = $request->session()->get('carts');
+        $quantities = $request->session()->get('quantities');
 
-    }
+        $quantities[$request->key] = '';
+        $new_carts = array_diff($carts, array($request->product_id));
 
-    public function test()
-    {
-        
+        $request->session()->put('quantities', $quantities);
+        $request->session()->put('carts', $new_carts);
+
+        return redirect('cart');
     }
 }
+

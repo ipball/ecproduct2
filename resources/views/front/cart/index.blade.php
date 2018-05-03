@@ -21,7 +21,7 @@
                         @forelse($products as $product)
                         <tr>
                             <td class="product-remove text-center align-middle">
-                                <button type="button" data-id="{{ $product->id }}" class="btn btn-danger btn-sm remove-item"><i class="fas fa-times"></i></button>
+                                <a role="button" href="{{ url('cart/delete?key='.$product->key.'&product_id='.$product->id) }}" class="btn btn-danger btn-sm remove-item"><i class="fas fa-times"></i></a>
                             </td>
                             <td class="product-image text-center">
                                 <img src="{{ $product->full_image }}" class="img-fluid rounded" style="height: 100px;" alt="itOffisde.com">
@@ -35,7 +35,7 @@
                                 {{ $product->price_currency }}
                             </td>
                             <td class="product-quantity w-25">
-                                <input type="number" value="{{ $product->cart_qty }}" class="form-control w-25" autocomplete="off">
+                                <input type="number" value="{{ $product->cart_qty }}" class="form-control w-50" autocomplete="off">
                             </td>
                             <td class="product-quantity text-right">
                                 <p>฿ {{ number_format($product->total, 2) }}</p>
