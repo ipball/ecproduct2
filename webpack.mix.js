@@ -35,5 +35,6 @@ mix.copy('node_modules/popper.js/dist/popper.min.js', 'public/js/popper.min.js')
 mix.copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/js/bootstrap.min.js');
 mix.copy('node_modules/holderjs/holder.min.js', 'public/js/holder.min.js');
 mix.copy('node_modules/sweetalert2/dist/sweetalert2.all.min.js', 'public/js/sweetalert2.all.min.js');
+mix.copy('node_modules/gasparesganga-jquery-loading-overlay/dist/loadingoverlay.min.js', 'public/js/loadingoverlay.min.js');
 mix.copyDirectory('resources/assets/img', 'public/img');
 mix.copyDirectory('resources/assets/font-awesome', 'public/font-awesome');

@@ -4,15 +4,18 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 
 class OrderRepository extends BaseRepository
 {
     protected $order_detail;
+    protected $product;
 
-    public function __construct(Order $order, OrderDetail $order_detail)
+    public function __construct(Order $order, OrderDetail $order_detail, Product $product)
     {
         $this->model = $order;
         $this->order_detail = $order_detail;
+        $this->product  = $product;
     }
 
     private function saveOrder($inputs)
@@ -59,6 +62,28 @@ class OrderRepository extends BaseRepository
     {
         $order->order_details->detach();
         $order->delete();
+    }
+
+    public function cart($request)
+    {
+        $carts = $request->session()->exists('carts') ? $request->session()->get('carts') : [];
+        $quantities = $request->session()->get('quantities');
+        $product_ids = collect([]);
+        foreach ($carts as $product_id) {
+            $product_ids->push((int) $product_id);
+        }        
+
+        $products = $this->product->find($product_ids);
+        $grand_total = 0;        
+        foreach ($products as &$product) {
+            $key = array_search($product->id, $carts);                        
+            $product->cart_qty = $quantities[$key];
+            $product->total = $product->cart_qty * $product->price;
+            $product->key = $key;
+            $grand_total += $product->total;            
+        }
+
+        return ['products' => $products, 'grand_total' => $grand_total];
     }
 
 }

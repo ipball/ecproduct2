@@ -9,5 +9,6 @@
     "/js/popper.min.js": "/js/popper.min.js",
     "/js/bootstrap.min.js": "/js/bootstrap.min.js",
     "/js/holder.min.js": "/js/holder.min.js",
-    "/js/sweetalert2.all.min.js": "/js/sweetalert2.all.min.js"
+    "/js/sweetalert2.all.min.js": "/js/sweetalert2.all.min.js",
+    "/js/loadingoverlay.min.js": "/js/loadingoverlay.min.js"
 }

@@ -8,4 +8,21 @@ $(function(){
         }
         $('#cartOrder').submit();
     });
+
+    $('body').on('click', '.update-item', function(e){
+        e.preventDefault(); 
+        var qtyEmpty = false;
+        $('.input-qty').each(function(){
+            if($(this).val() < 1 || $(this).val() == ''){
+                qtyEmpty = true;
+            }
+        });
+
+        if(qtyEmpty){
+            showAlert('error', 'โปรดระบุจำนวน');
+            return false;
+        }
+
+        $('#cartUpdate').submit();
+    });
 });

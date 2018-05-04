@@ -1,6 +1,7 @@
 $(function(){
     $('body').on('click', '.add-item', function(e){
         e.preventDefault();
+        $.LoadingOverlay('show');
         var product_id = $(this).attr('data-url');
         $.ajaxSetup({
             headers: {
@@ -15,9 +16,12 @@ $(function(){
                 quantity: 1            
             },
             success: function() {
-                window.location.href = APP_URL + '/cart';
+                $.LoadingOverlay("hide");
+                setTimeout(function(){
+                    timeAlert('success', 'เพิ่มสินค้าในตะกร้าแล้ว');
+                },100);
             }
-          });
+          });          
           return false;
     });
 });

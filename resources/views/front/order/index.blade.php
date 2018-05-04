@@ -1,4 +1,4 @@
-@extends('layouts.frontmaster') @section('title', 'ตะกร้าสินค้า') @section('content')
+@extends('layouts.frontmaster') @section('title', 'การสั่งซื้อสินค้า') @section('content')
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -19,12 +19,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($products as $product)
+                            @forelse($products as $no => $product)
                             <tr>
                                 <td class="product-remove text-center align-middle">
-                                    <a role="button" href="{{ url('cart/delete?key='.$product->key.'&product_id='.$product->id) }}" class="btn btn-danger btn-sm remove-item">
-                                        <i class="fas fa-times"></i>
-                                    </a>
+                                    {{ $no+1 }}
                                 </td>
                                 <td class="product-image text-center">
                                     <img src="{{ $product->full_image }}" class="img-fluid rounded" style="height: 100px;" alt="itOffisde.com">
@@ -37,8 +35,8 @@
                                 <td class="product-unit-price text-right">
                                     {{ $product->price_currency }}
                                 </td>
-                                <td class="product-quantity w-25">
-                                    <input type="number" name="quantity_{{ $product->key }}" value="{{ $product->cart_qty }}" class="form-control w-50 input-qty" autocomplete="off" required>
+                                <td class="product-quantity text-right">
+                                    {{ number_format($product->cart_qty) }}
                                 </td>
                                 <td class="product-quantity text-right">
                                     <p>฿ {{ number_format($product->total, 2) }}</p>
@@ -63,10 +61,9 @@
                     <a class="btn btn-secondary" href="{{ url('/') }}" role="button">ซื้อสินค้าอื่นต่อ</a>
                 </div>
                 @if($products->count() > 0)
-                <div class="float-right">
-                    <a class="btn btn-danger" href="{{ url('cart/delete-all') }}" role="button">ล้างสินค้าในตะกร้าทั้งหมด</a>
-                    <a class="btn btn-warning update-item" href="#" role="button">ปรับปรุงตะกร้าสินค้า</a>
-                    <a class="btn btn-primary" href="{{ url('checkout') }}" role="button">สั่งซื้อสินค้า</a>
+                <div class="float-right">                    
+                    <a class="btn btn-info" href="{{ url('cart') }}" role="button">กลับไปหน้าตะกร้าสินค้า</a>
+                    <a class="btn btn-primary" href="#" role="button">ยืนยันการสั่งซื้อสินค้า</a>
                 </div>
                 @endif
             </div>

@@ -33,7 +33,7 @@
                                 <a role="button" href="{{ url('product/'.$product->id.'/'.$product->name) }}" class="btn btn-sm btn-outline-secondary">รายละเอียด</a>
                                 <button type="button" data-url="{{ $product->id }}" class="btn btn-sm btn-primary add-item">
                                     <i class="fa fa-shopping-cart"></i>
-                                    สั่งซื้อ
+                                    ซื้อสินค้า
                                 </button>
                             </div>
                             <small class="text-muted">{{ $product->price_currency }}</small>

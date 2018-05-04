@@ -11,5 +11,12 @@ Route::prefix('cart')->group(function(){
     Route::get('', 'Front\CartController@index');
     Route::post('add', 'Front\CartController@addItem');
     Route::get('delete', 'Front\CartController@deleteItem');
-    Route::patch('update', 'Front\CartController@updateItem');
+    Route::get('delete-all', 'Front\CartController@deleteAll');
+    Route::post('update', 'Front\CartController@updateItem');
+});
+
+// checkout order
+Route::prefix('checkout')->group(function(){
+    Route::get('', 'Front\OrderController@index');
+    Route::post('', 'Front\OrderController@store');
 });

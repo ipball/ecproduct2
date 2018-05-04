@@ -82,6 +82,7 @@
     <script src="{{ asset('js/holder.min.js') }}"></script>
 
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('js/loadingoverlay.min.js') }}"></script>
 
     <script src="{{ asset('js/front-custom.min.js') }}"></script>
 

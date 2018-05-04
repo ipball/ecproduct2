@@ -77,7 +77,7 @@
                         @if($product->quantity > 0)
                         <hr>
                         <a href="#" class="btn btn-lg btn-outline-primary text-uppercase add-item">
-                            <i class="fas fa-shopping-cart"></i> สั่งซื้อ </a>
+                            <i class="fas fa-shopping-cart"></i> ซื้อสินค้า </a>
                         @endif
                     </article>
                     <!-- card-body.// -->
