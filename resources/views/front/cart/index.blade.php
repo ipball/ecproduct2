@@ -65,7 +65,7 @@
                 @if($products->count() > 0)
                 <div class="float-right">
                     <a class="btn btn-danger" href="{{ url('cart/delete-all') }}" role="button">ล้างสินค้าในตะกร้าทั้งหมด</a>
-                    <a class="btn btn-warning update-item" href="#" role="button">ปรับปรุงตะกร้าสินค้า</a>
+                    <a class="btn btn-warning update-item" href="#" role="button" aria-disabled="true">ปรับปรุงตะกร้าสินค้า</a>
                     <a class="btn btn-primary" href="{{ url('checkout') }}" role="button">สั่งซื้อสินค้า</a>
                 </div>
                 @endif

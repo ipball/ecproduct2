@@ -4,69 +4,125 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-12">
-                <form id="cartUpdate" method="POST" action="{{ url('cart/update') }}">
-                    {{ csrf_field() }}
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="product-remove text-center">#</th>
-                                <th class="product-image text-center">รูปภาพ</th>
-                                <th class="t-product-name text-center">ชื่อสินค้า</th>
-                                <th class="product-unit-price text-center">ราคาสินค้า</th>
-                                <th class="product-quantity text-center">จำนวน</th>
-                                <th class="product-subtotal text-center">รวม</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($products as $no => $product)
-                            <tr>
-                                <td class="product-remove text-center align-middle">
-                                    {{ $no+1 }}
-                                </td>
-                                <td class="product-image text-center">
-                                    <img src="{{ $product->full_image }}" class="img-fluid rounded" style="height: 100px;" alt="itOffisde.com">
-                                </td>
-                                <td class="t-product-name text-left">
-                                    {{ $product->name }}
-                                    <br>
-                                    <span class="font-weight-light .text-black-50">({{ $product->barcode }})</span>
-                                </td>
-                                <td class="product-unit-price text-right">
-                                    {{ $product->price_currency }}
-                                </td>
-                                <td class="product-quantity text-right">
-                                    {{ number_format($product->cart_qty) }}
-                                </td>
-                                <td class="product-quantity text-right">
-                                    <p>฿ {{ number_format($product->total, 2) }}</p>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="6" class="text-center">ไม่มีสินค้าในตะกร้า</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+            {{-- billto --}}
+            <div class="col-sm-8">
+                <h4 class="mb-3">ที่อยู่ในการจัดส่งสินค้า</h4>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>แจ้งชำระเงิน!</strong> หลังจากลูกค้าชำระเงินแล้วกรุณาแจ้งการโอนเงินพร้อมสลิป ทางไลน์ไอดี @baht
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                <form id="orderSave">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label for="firstName">ชื่อ-นามสกุล</label>
+                            <input type="text" class="form-control" name="name" placeholder="" value="">
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label for="lastName">เบอร์โทรศัพท์</label>
+                            <input type="text" class="form-control" name="tel" placeholder="" value="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label for="firstName">อีเมล์</label>
+                            <input type="text" class="form-control" name="email" placeholder="" value="">
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label for="lastName">ไอดีไลน์</label>
+                            <input type="text" class="form-control" name="lineid" placeholder="" value="">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <label for="email">ที่อยู่</label>
+                            <input type="email" class="form-control" name="address">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-5 mb-3">
+                            <label for="country">อำเภอ</label>
+                            <select class="custom-select d-block w-100" name="district">
+                                <option value="">เลือก...</option>
+                                @foreach($districts as $district)
+                                <option value="{{ $district->id }}">{{ $district->name_th }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label for="state">จังหวัด</label>
+                            <select class="custom-select d-block w-100" name="province">
+                                <option value="">เลือก...</option>
+                                @foreach($provinces as $province)
+                                <option value="{{ $province->id }}">{{ $province->name_th }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label for="zip">รหัสไปรษณีย์</label>
+                            <input type="text" class="form-control" name="postcode" placeholder="">
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+
+                    <h4 class="mb-3">การชำระเงิน</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="credit" name="payment_method" type="radio" class="custom-control-input" checked="">
+                            <label class="custom-control-label" for="credit">เงินสด/โอนเงิน</label>
+                        </div>                        
+                        <div class="custom-control custom-radio">
+                            <input id="paypal" name="payment_method" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="paypal">PayPal</label>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">สั่งซื้อสินค้า</button>
                 </form>
             </div>
-            <div class="col-sm-6 offset-sm-6 text-right">
-                <h2>รวมทั้งสิ้น
-                    <span>฿ {{ number_format($grand_total,2) }}</span>
-                </h2>
+            {{-- end billto --}} {{-- in cart --}}
+            <div class="col-sm-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">ตะกร้าสินค้าของคุณ</span>
+                    <span class="badge badge-success badge-pill">{{ $products->count() }} รายการ</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    @forelse($products as $product)
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">{{ $product->name }}</h6>
+                            <span class="font-weight-light .text-black-50">({{ $product->barcode }})</span>
+                            <small class="text-muted">
+                                {{ $product->price_currency }} x {{ number_format($product->cart_qty) }}
+                            </small>
+                        </div>
+                        <span class="text-muted">฿ {{ number_format($product->total, 2) }}</span>
+                    </li>
+                    @empty
+                    <p class="text-center">ไม่มีสินค้าในตะกร้า</p>
+                    @endforelse
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>รวมทั้งสิ้น (บาท)</strong>
+                        <strong>฿ {{ number_format($grand_total, 2) }}</strong>
+                    </li>
+                </ul>
+                <form class="card p-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Promo code">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-sm-12">
-                <div class="float-left">
-                    <a class="btn btn-secondary" href="{{ url('/') }}" role="button">ซื้อสินค้าอื่นต่อ</a>
-                </div>
-                @if($products->count() > 0)
-                <div class="float-right">                    
-                    <a class="btn btn-info" href="{{ url('cart') }}" role="button">กลับไปหน้าตะกร้าสินค้า</a>
-                    <a class="btn btn-primary" href="#" role="button">ยืนยันการสั่งซื้อสินค้า</a>
-                </div>
-                @endif
-            </div>
+            {{-- end incart --}}
         </div>
     </div>
 </div>

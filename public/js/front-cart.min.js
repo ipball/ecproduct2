@@ -10,7 +10,9 @@ $(function(){
     });
 
     $('body').on('click', '.update-item', function(e){
-        e.preventDefault(); 
+        e.preventDefault();
+        console.log('click');
+        $(this).addClass('disabled');
         var qtyEmpty = false;
         $('.input-qty').each(function(){
             if($(this).val() < 1 || $(this).val() == ''){
