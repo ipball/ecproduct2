@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\Province;
 use App\Repositories\OrderRepository;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -28,5 +29,12 @@ class OrderController extends Controller
             'provinces' => $provinces,
             'districts' => $districts
         ]);
+    }
+
+    public function store(OrderRequest $request)
+    {
+        $request->session()->get('carts');
+        $request->session()->get('quantities');
+        $this->order_gestion->store($request);
     }
 }

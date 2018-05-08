@@ -2,6 +2,7 @@
     "/css/front-custom.css": "/css/front-custom.css",
     "/js/front-custom.min.js": "/js/front-custom.min.js",
     "/js/front-cart.min.js": "/js/front-cart.min.js",
+    "/js/front-order.min.js": "/js/front-order.min.js",
     "/js/front-home.min.js": "/js/front-home.min.js",
     "/css/bootstrap.min.css": "/css/bootstrap.min.css",
     "/css/sweetalert2.min.css": "/css/sweetalert2.min.css",
@@ -10,5 +11,8 @@
     "/js/bootstrap.min.js": "/js/bootstrap.min.js",
     "/js/holder.min.js": "/js/holder.min.js",
     "/js/sweetalert2.all.min.js": "/js/sweetalert2.all.min.js",
-    "/js/loadingoverlay.min.js": "/js/loadingoverlay.min.js"
+    "/js/loadingoverlay.min.js": "/js/loadingoverlay.min.js",
+    "/js/axios.min.js": "/js/axios.min.js",
+    "/js/jquery.validate.min.js": "/js/jquery.validate.min.js",
+    "/js/messages_th.js": "/js/messages_th.js"
 }

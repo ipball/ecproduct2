@@ -11,7 +11,6 @@ $(function(){
 
     $('body').on('click', '.update-item', function(e){
         e.preventDefault();
-        console.log('click');
         $(this).addClass('disabled');
         var qtyEmpty = false;
         $('.input-qty').each(function(){

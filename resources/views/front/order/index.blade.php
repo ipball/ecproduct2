@@ -7,39 +7,51 @@
             {{-- billto --}}
             <div class="col-sm-8">
                 <h4 class="mb-3">ที่อยู่ในการจัดส่งสินค้า</h4>
+                {{-- message shipto --}}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>แจ้งชำระเงิน!</strong> หลังจากลูกค้าชำระเงินแล้วกรุณาแจ้งการโอนเงินพร้อมสลิป ทางไลน์ไอดี @baht
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                <form id="orderSave">
+                    <strong>แจ้งชำระเงิน!</strong> หลังจากลูกค้าชำระเงินแล้วกรุณาแจ้งการโอนเงินพร้อมสลิป ทางไลน์ไอดี @baht
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{-- message error --}} @if ($errors->any())
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form id="orderSave" method="POST" action="{{ url('checkout') }}">
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6 mb-3">
                             <label for="firstName">ชื่อ-นามสกุล</label>
-                            <input type="text" class="form-control" name="name" placeholder="" value="">
+                            <input type="text" class="form-control" name="name" autocomplete="off">
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="lastName">เบอร์โทรศัพท์</label>
-                            <input type="text" class="form-control" name="tel" placeholder="" value="">
+                            <input type="text" class="form-control" name="tel" autocomplete="off">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-6 mb-3">
                             <label for="firstName">อีเมล์</label>
-                            <input type="text" class="form-control" name="email" placeholder="" value="">
+                            <input type="text" class="form-control" name="email" autocomplete="off">
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="lastName">ไอดีไลน์</label>
-                            <input type="text" class="form-control" name="lineid" placeholder="" value="">
+                            <input type="text" class="form-control" name="lineid" autocomplete="off">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12 mb-3">
-                            <label for="email">ที่อยู่</label>
-                            <input type="email" class="form-control" name="address">
+                            <label for="address">ที่อยู่</label>
+                            <input type="text" class="form-control" name="address" autocomplete="off">
                         </div>
                     </div>
 
@@ -64,26 +76,12 @@
                             </select>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label for="zip">รหัสไปรษณีย์</label>
-                            <input type="text" class="form-control" name="postcode" placeholder="">
+                            <label for="postcode">รหัสไปรษณีย์</label>
+                            <input type="text" class="form-control" name="postcode" autocomplete="off">
                         </div>
-                    </div>
+                    </div>                                       
                     <hr class="mb-4">
-
-                    <h4 class="mb-3">การชำระเงิน</h4>
-
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="payment_method" type="radio" class="custom-control-input" checked="">
-                            <label class="custom-control-label" for="credit">เงินสด/โอนเงิน</label>
-                        </div>                        
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="payment_method" type="radio" class="custom-control-input">
-                            <label class="custom-control-label" for="paypal">PayPal</label>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">สั่งซื้อสินค้า</button>
+                    <button class="btn btn-primary btn-lg btn-block order-save" type="button" aria-disabled="true">สั่งซื้อสินค้า</button>
                 </form>
             </div>
             {{-- end billto --}} {{-- in cart --}}
@@ -128,5 +126,7 @@
 </div>
 
 @endsection @section('script')
-<script src="{{ asset('js/front-cart.min.js') }}"></script>
+<script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('js/messages_th.js') }}"></script>
+<script src="{{ asset('js/front-order.min.js') }}"></script>
 @endsection

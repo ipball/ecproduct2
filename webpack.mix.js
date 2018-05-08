@@ -21,6 +21,10 @@ mix.scripts([
 ], 'public/js/front-cart.min.js');
 
 mix.scripts([
+    'resources/assets/js/front-order.js'
+], 'public/js/front-order.min.js');
+
+mix.scripts([
     'resources/assets/js/front-home.js'
 ], 'public/js/front-home.min.js');
 
@@ -36,5 +40,8 @@ mix.copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/js/bootstrap
 mix.copy('node_modules/holderjs/holder.min.js', 'public/js/holder.min.js');
 mix.copy('node_modules/sweetalert2/dist/sweetalert2.all.min.js', 'public/js/sweetalert2.all.min.js');
 mix.copy('node_modules/gasparesganga-jquery-loading-overlay/dist/loadingoverlay.min.js', 'public/js/loadingoverlay.min.js');
+mix.copy('node_modules/axios/dist/axios.min.js', 'public/js/axios.min.js');
+mix.copy('node_modules/jquery-validation/dist/jquery.validate.min.js', 'public/js/jquery.validate.min.js');
+mix.copy('node_modules/jquery-validation/dist/localization/messages_th.js', 'public/js/messages_th.js');
 mix.copyDirectory('resources/assets/img', 'public/img');
 mix.copyDirectory('resources/assets/font-awesome', 'public/font-awesome');
