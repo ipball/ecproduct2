@@ -33,8 +33,14 @@ class OrderController extends Controller
 
     public function store(OrderRequest $request)
     {
-        $request->session()->get('carts');
-        $request->session()->get('quantities');
+        $data = $this->order_gestion->cart($request);        
+        $data['member_id'] = 0;
+        $data['order_status'] = getStatusOrder('pending');
+        $request->merge($data);        
         $this->order_gestion->store($request);
+
+        $request->session()->forget('carts');
+        $request->session()->forget('quantities');
+        return redirect('/');
     }
 }

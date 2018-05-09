@@ -18,12 +18,13 @@ class OrderRepository extends BaseRepository
         $this->product  = $product;
     }
 
-    private function saveOrder($inputs)
+    private function saveOrder($data, $inputs)
     {
         $data->grand_total = $inputs['grand_total'];
         $data->member_id = $inputs['member_id'];
         $data->name = $inputs['name'];
         $data->tel = $inputs['tel'];
+        $data->email = $inputs['email'];
         $data->lineid = $inputs['lineid'];
         $data->address = $inputs['address'];
         $data->district = $inputs['district'];
@@ -46,15 +47,15 @@ class OrderRepository extends BaseRepository
 
     public function store($inputs)
     {
-        $order = $this->saveOrder($inputs);
-
+        $order = $this->saveOrder(new $this->model, $inputs);        
         // Order detail        
-        foreach ($inputs['order_details'] as $order_detail) {
+        foreach ($inputs['products'] as $order_detail) {            
             $detail = new $this->order_detail();
-            $detail->product_id = $order_detail['product_id'];
-            $detail->quantity = $order_detail['quantity'];
+            $detail->order_id = $order->id;
+            $detail->product_id = $order_detail['id'];
+            $detail->quantity = $order_detail['cart_qty'];
             $detail->price = $order_detail['price'];
-            $order->order_details()->save($detail);
+            $detail->save();
         }
     }
 

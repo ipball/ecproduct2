@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->string('email', 100);
             $table->string('lineid', 100)->nullable(true);
             $table->string('address');
-            $table->string('district', 100);
-            $table->string('province', 100);
+            $table->integer('district');
+            $table->integer('province');
             $table->string('postcode', 20);
             $table->enum('order_status', ['PENDING', 'PAID', 'SHIPPING', 'DELIVERED', 'REFUNDED', 'CANCEL']);	
             $table->timestamps();
