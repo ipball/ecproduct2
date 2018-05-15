@@ -57,15 +57,6 @@
 
 
                     <div class="row">
-                        <div class="col-sm-5 mb-3">
-                            <label for="country">อำเภอ</label>
-                            <select class="custom-select d-block w-100" name="district">
-                                <option value="">เลือก...</option>
-                                @foreach($districts as $district)
-                                <option value="{{ $district->id }}">{{ $district->name_th }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="col-sm-4 mb-3">
                             <label for="state">จังหวัด</label>
                             <select class="custom-select d-block w-100" name="province">
@@ -75,9 +66,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-sm-5 mb-3">
+                            <label for="country">อำเภอ</label>
+                            <select class="custom-select d-block w-100" name="district">
+                                <option value="">เลือก...</option>
+                            </select>
+                        </div>
                         <div class="col-sm-3 mb-3">
                             <label for="postcode">รหัสไปรษณีย์</label>
-                            <input type="text" class="form-control" name="postcode" autocomplete="off">
+                            <input type="number" class="form-control" name="postcode" autocomplete="off">
                         </div>
                     </div>                                       
                     <hr class="mb-4">

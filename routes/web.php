@@ -20,3 +20,8 @@ Route::prefix('checkout')->group(function(){
     Route::get('', 'Front\OrderController@index');
     Route::post('', 'Front\OrderController@store');
 });
+
+// province
+Route::prefix('province')->group(function(){
+    Route::get('{id}/district', 'Front\DistrictController@getByProvince');   
+});
