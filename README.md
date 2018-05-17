@@ -11,7 +11,7 @@
 * พิมพ์คำสั่ง command line `npm install` กด enter
 * พิมพ์คำสั่ง command line `npm run dev` กด enter
 * พิมพ์คำสั่ง command line  `php artisan key:generate` กด enter
-* สร้าง database และ แก้ไขค่า database ในไฟล์ *.env* ให้ถูกต้อง
+* สร้าง database และ แก้ไขค่า database ในไฟล์ *.env* หรือ ไฟล์ *config/database.php* ให้ถูกต้อง
 * พิมพ์คำสั่ง command line เพื่อสร้างฐานข้อมูลและข้อมูลทดสอบ `php artisan migrate --seed` กด enter
 * พิมพ์คำสั่ง command line `php artisan serve` กด enter แล้วเปิดลิงค์ http://localhost:8000/
 
