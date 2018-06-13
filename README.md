@@ -15,7 +15,7 @@
 * พิมพ์คำสั่ง command line เพื่อสร้างฐานข้อมูลและข้อมูลทดสอบ `php artisan migrate --seed` กด enter
 * พิมพ์คำสั่ง command line `php artisan serve` กด enter แล้วเปิดลิงค์ http://localhost:8000/
 
-หากมีข้อสงสัยหรือติดปัญหาการ สามารถติดต่อเราที่ [https://www.bahtsoft.com](https://www.bahtsoft.com)
+หากมีข้อสงสัยหรือติดปัญหาการ สามารถติดต่อเราที่
 หรือ [https://www.itoffside.com](https://www.itoffside.com)
 
 ### สนับสนุนนักพัฒนา ###
