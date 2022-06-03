@@ -22,7 +22,7 @@
     "dependencies": {
         "gasparesganga-jquery-loading-overlay": "^2.1.2",
         "holderjs": "^2.9.4",
-        "jquery-validation": "^1.17.0",
+        "jquery-validation": "^1.19.4",
         "sweetalert2": "^7.19.3"
     }
 }
